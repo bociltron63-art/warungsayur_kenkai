@@ -1,14 +1,19 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { productService } from "@/services/productService";
 
-const ConfigContext = createContext({ brand: "Warung Sayur KenKai", owner_whatsapp_number: "62XXXXXXXXXXX", service_areas: ["Bekasi", "Tipar Cakung"] });
+const DEFAULTS = {
+  brand: "Warung Sayur KenKai",
+  owner_whatsapp_number: "62XXXXXXXXXXX",
+  service_areas: ["Bekasi", "Tipar Cakung"],
+  delivery_fee: 10000,
+  min_order: 25000,
+  free_delivery_threshold: 100000,
+};
+
+const ConfigContext = createContext(DEFAULTS);
 
 export const ConfigProvider = ({ children }) => {
-  const [config, setConfig] = useState({
-    brand: "Warung Sayur KenKai",
-    owner_whatsapp_number: "62XXXXXXXXXXX",
-    service_areas: ["Bekasi", "Tipar Cakung"],
-  });
+  const [config, setConfig] = useState(DEFAULTS);
 
   useEffect(() => {
     productService.getConfig().then(setConfig).catch(() => {});

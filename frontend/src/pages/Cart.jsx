@@ -88,6 +88,9 @@ const Cart = () => {
             >
               Checkout via WhatsApp
             </button>
+            <p className="mt-3 text-xs text-stone-500 text-center" data-testid="cart-fee-note">
+              Ongkir & minimal belanja dihitung saat checkout.
+            </p>
             <Link to="/produk" className="mt-3 block text-center text-sm font-semibold text-stone-500 hover:text-kk-green">
               Lanjut Belanja
             </Link>

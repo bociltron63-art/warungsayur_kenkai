@@ -47,6 +47,9 @@ class Config(BaseModel):
     brand: str
     owner_whatsapp_number: str
     service_areas: List[str]
+    delivery_fee: int
+    min_order: int
+    free_delivery_threshold: int
 
 
 class OrderNumber(BaseModel):
@@ -65,6 +68,9 @@ async def get_config():
         brand="Warung Sayur KenKai",
         owner_whatsapp_number=os.environ.get("OWNER_WHATSAPP_NUMBER", "62XXXXXXXXXXX"),
         service_areas=["Bekasi", "Tipar Cakung"],
+        delivery_fee=int(os.environ.get("DELIVERY_FEE", "10000")),
+        min_order=int(os.environ.get("MIN_ORDER", "25000")),
+        free_delivery_threshold=int(os.environ.get("FREE_DELIVERY_THRESHOLD", "100000")),
     )
 
 

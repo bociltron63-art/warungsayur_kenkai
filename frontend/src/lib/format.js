@@ -20,7 +20,7 @@ export const PLACEHOLDER_IMAGE =
   );
 
 // Build the WhatsApp order message. Every line item ALWAYS shows quantity + satuan.
-export const buildWhatsAppMessage = ({ customer, items, total, orderNumber }) => {
+export const buildWhatsAppMessage = ({ customer, items, subtotal, deliveryFee, total, orderNumber }) => {
   const lines = [];
   lines.push("Halo Warung Sayur KenKai 👋");
   lines.push("Saya ingin melakukan pemesanan:");
@@ -43,6 +43,10 @@ export const buildWhatsAppMessage = ({ customer, items, total, orderNumber }) =>
     lines.push(`   Subtotal: ${formatRupiah(subtotal)}`);
   });
   lines.push("--------------------");
+  lines.push(`Subtotal: ${formatRupiah(subtotal)}`);
+  if (customer.metode !== "ambil") {
+    lines.push(`Ongkir: ${deliveryFee > 0 ? formatRupiah(deliveryFee) : "Gratis"}`);
+  }
   lines.push(`Total: ${formatRupiah(total)}`);
   lines.push("--------------------");
   lines.push("Metode:");

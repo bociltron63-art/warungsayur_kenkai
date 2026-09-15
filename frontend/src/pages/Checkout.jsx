@@ -16,6 +16,15 @@ const Checkout = () => {
   const [errors, setErrors] = React.useState({});
   const [submitting, setSubmitting] = React.useState(false);
 
+  const deliveryFee = React.useMemo(() => {
+    if (form.metode === "ambil") return 0;
+    if (totalPrice >= config.free_delivery_threshold) return 0;
+    return config.delivery_fee;
+  }, [form.metode, totalPrice, config]);
+
+  const grandTotal = totalPrice + deliveryFee;
+  const belowMin = totalPrice < config.min_order;
+
   React.useEffect(() => {
     if (items.length === 0) navigate("/keranjang");
   }, [items.length, navigate]);
@@ -35,6 +44,10 @@ const Checkout = () => {
   };
 
   const handleSubmit = async () => {
+    if (belowMin) {
+      toast.error(`Minimal belanja ${formatRupiah(config.min_order)}. Tambah produk dulu ya.`);
+      return;
+    }
     if (!validate()) {
       toast.error("Mohon lengkapi data pemesanan.");
       return;
@@ -42,7 +55,7 @@ const Checkout = () => {
     setSubmitting(true);
     try {
       const orderNumber = await productService.getOrderNumber();
-      const message = buildWhatsAppMessage({ customer: form, items, total: totalPrice, orderNumber });
+      const message = buildWhatsAppMessage({ customer: form, items, subtotal: totalPrice, deliveryFee, total: grandTotal, orderNumber });
       const url = buildWhatsAppUrl(config.owner_whatsapp_number, message);
       toast.success("Pesanan disiapkan! Mengarahkan ke WhatsApp…");
       window.open(url, "_blank");
@@ -147,15 +160,41 @@ const Checkout = () => {
                 </div>
               ))}
             </div>
-            <div className="mt-4 pt-4 border-t border-border flex items-center justify-between">
-              <span className="text-stone-600">Total</span>
-              <span data-testid="checkout-total" className="font-heading font-extrabold text-2xl text-kk-green">{formatRupiah(totalPrice)}</span>
+            <div className="mt-4 pt-4 border-t border-border space-y-2">
+              <div className="flex items-center justify-between text-sm text-stone-600">
+                <span>Subtotal</span>
+                <span data-testid="checkout-subtotal" className="font-semibold text-stone-800">{formatRupiah(totalPrice)}</span>
+              </div>
+              {form.metode !== "ambil" && (
+                <div className="flex items-center justify-between text-sm text-stone-600">
+                  <span>Ongkos Kirim</span>
+                  <span data-testid="checkout-ongkir" className={`font-semibold ${deliveryFee === 0 ? "text-kk-green" : "text-stone-800"}`}>
+                    {deliveryFee === 0 ? "Gratis" : formatRupiah(deliveryFee)}
+                  </span>
+                </div>
+              )}
+              <div className="flex items-center justify-between pt-2 border-t border-border">
+                <span className="text-stone-600">Total</span>
+                <span data-testid="checkout-total" className="font-heading font-extrabold text-2xl text-kk-green">{formatRupiah(grandTotal)}</span>
+              </div>
             </div>
+
+            {form.metode !== "ambil" && deliveryFee > 0 && (
+              <p className="mt-3 text-xs text-stone-500" data-testid="free-delivery-hint">
+                Gratis ongkir untuk belanja min. {formatRupiah(config.free_delivery_threshold)}.
+              </p>
+            )}
+            {belowMin && (
+              <p className="mt-3 text-xs font-semibold text-rose-600" data-testid="min-order-warning">
+                Minimal belanja {formatRupiah(config.min_order)}. Kurang {formatRupiah(config.min_order - totalPrice)} lagi.
+              </p>
+            )}
+
             <button
               onClick={handleSubmit}
-              disabled={submitting}
+              disabled={submitting || belowMin}
               data-testid="send-whatsapp-button"
-              className="mt-5 w-full inline-flex items-center justify-center gap-2 py-3.5 rounded-xl bg-kk-wa text-white font-semibold hover:brightness-105 active:scale-95 transition-all disabled:opacity-60"
+              className="mt-4 w-full inline-flex items-center justify-center gap-2 py-3.5 rounded-xl bg-kk-wa text-white font-semibold hover:brightness-105 active:scale-95 transition-all disabled:opacity-60 disabled:cursor-not-allowed"
             >
               <MessageCircle className="w-5 h-5" /> {submitting ? "Menyiapkan…" : "Kirim Pesanan ke WhatsApp"}
             </button>
