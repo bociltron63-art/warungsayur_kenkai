@@ -25,5 +25,5 @@ Modern online grocery web app "Warung Sayur KenKai" (area: Bekasi & Tipar Cakung
 - Tested end-to-end: backend 100%, frontend 100% (iteration_1).
 
 ## Backlog / remaining
-- P1: Connect real Google Sheet (set GOOGLE_SHEET_CSV_URL) + set real OWNER_WHATSAPP_NUMBER.
-- P2: Product image per item in sheet; promo/discount; delivery fee/min order; product detail as shareable route.
+- P1: (done 2026-06) Connected real Google Sheet (id 1-ygz0Ki-FNHC_ypD1CDc40dnso5omIBgrD1g9vC26uE, backend auto-converts share link to CSV export). Set real OWNER_WHATSAPP_NUMBER=6281389065327. Added Ongkir & Minimal Order (DELIVERY_FEE 10000, MIN_ORDER 25000, FREE_DELIVERY_THRESHOLD 100000; shown in checkout summary + WhatsApp message; gratis ongkir hint; send disabled below min order).
+- P2: Promo/discount; product detail as shareable route; owner order dashboard.
