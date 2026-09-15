@@ -1,0 +1,92 @@
+{
+  "brand_identity": {
+    "name": "Warung Sayur KenKai",
+    "tagline": "Sayur Segar & Kebutuhan Dapur, Lebih Mudah.",
+    "subheadline": "Belanja sayuran hijau pilihan, buah segar, bumbu dapur, protein & sembako harian langsung diantar ke rumah area Bekasi & Tipar Cakung.",
+    "service_areas": ["Bekasi", "Tipar Cakung"],
+    "archetype": "Organic & Earthy + Modern Premium Asian Boutique Grocery",
+    "emotional_tone": "Fresh, Natural, Trustworthy, Modern, Friendly, Frictionless",
+    "theme_preference": "Light mode default with rich warm ivory background and vibrant emerald accents"
+  },
+  "typography": {
+    "heading_font": "Outfit, Plus Jakarta Sans, sans-serif",
+    "body_font": "Plus Jakarta Sans, Inter, sans-serif",
+    "mono_font": "JetBrains Mono, monospace",
+    "hierarchy": {
+      "h1": "text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 leading-[1.1]",
+      "h2": "text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-slate-900",
+      "h3": "text-xl sm:text-2xl font-semibold text-slate-900",
+      "h4": "text-lg sm:text-xl font-semibold text-slate-800",
+      "body": "text-base text-slate-600 leading-relaxed",
+      "body_sm": "text-sm text-slate-500",
+      "caption": "text-xs font-medium uppercase tracking-wider text-emerald-800"
+    }
+  },
+  "colors": {
+    "primary": "#15803d",
+    "primary_hover": "#166534",
+    "primary_light": "#ecfdf4",
+    "accent_emerald": "#059669",
+    "accent_lime": "#84cc16",
+    "accent_warm_amber": "#f59e0b",
+    "background_page": "#fafaf9",
+    "background_card": "#ffffff",
+    "background_secondary": "#f4f4f2",
+    "border_subtle": "#e7e5e4",
+    "text_main": "#1c1917",
+    "text_muted": "#57534e",
+    "status_in_stock": "#15803d",
+    "status_out_of_stock": "#e11d48",
+    "whatsapp_brand": "#25d366"
+  },
+  "layout_and_spacing": {
+    "container": "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8",
+    "section_padding": "py-12 sm:py-16 lg:py-20",
+    "card_padding": "p-4 sm:p-6",
+    "bento_grid_categories": "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6",
+    "product_catalog_grid": "grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6",
+    "satuan_unit_display_rules": "CRITICAL: The unit ('satuan') e.g. kg, ikat, pcs, bungkus, botol MUST be displayed prominently in bold tag alongside price (e.g. 'Rp 8.500 / ikat') on every Product Card, Product Detail Modal, Cart Line Item, and formatted WhatsApp message text."
+  },
+  "key_components": {
+    "navigation": {
+      "desktop": "Sticky Header with blurred background (backdrop-blur-md bg-white/90), logo with fresh leaf badge, navigation links (Beranda, Produk, Kategori, Tentang Kami), Bekasi-Tipar Cakung location pill badge, and Floating/Header Cart Trigger with badge count.",
+      "mobile": "Header with brand logo + cart button, drawer hamburger menu, and sticky Bottom Navigation Bar (Beranda, Produk, Kategori, Keranjang with badge count)."
+    },
+    "hero": {
+      "visual": "Asymmetric bento dynamic hero section. Left side features high impact text, location badge 'Bekasi • Tipar Cakung', CTA buttons ('Belanja Sekarang', 'Lihat Promo'), and trust metrics (100% Segar, Instant Delivery, Garansi Kualitas). Right side features interactive seasonal showcase card with high-res vegetable banner.",
+      "cta": "Primary button in Emerald Green with hover scale effect."
+    },
+    "product_card": {
+      "features": "Product image with aspect-square object-cover, category badge, stock status tag ('Tersedia' vs 'Habis'), clear Name, Price in IDR, prominent Satuan Unit tag (e.g. '/ ikat'), Quantity Selector (+/-), and Add to Cart button ('+ Keranjang'). If out of stock, card shows grayed state with 'Habis' badge and disabled button."
+    },
+    "product_detail_modal": {
+      "features": "Large image preview with zoom, detailed unit specification, stock count, description, freshness origin, quantity stepper, total price calculation preview, and immediate Add-to-Cart / Buy Now buttons."
+    },
+    "shopping_cart_drawer": {
+      "features": "Slide-over drawer or page listing selected items, editable quantities with unit multiplier (e.g., 2 ikat x Rp 4.000 = Rp 8.000), single item delete, clear subtotal, estimated delivery note for Bekasi/Tipar Cakung, and direct button to Checkout."
+    },
+    "whatsapp_checkout": {
+      "features": "Frictionless form capturing Nama Lengkap, Nomor WhatsApp, Alamat Lengkap (Bekasi / Tipar Cakung), Delivery Method selector ('Diantar Ke Rumah' vs 'Ambil Sendiri di Warung'), Catatan Tambahan. Auto-generates structured WhatsApp message encoded URL to send to owner."
+    },
+    "floating_whatsapp": {
+      "features": "Sticky bottom-right glowing WhatsApp icon button for fast customer support or custom inquiry."
+    }
+  },
+  "image_urls": {
+    "hero_fresh_produce": "https://images.unsplash.com/photo-1540420828642-fca2c5c18abe?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzNTl8MHwxfHNlYXJjaHw0fHxhc2lhbiUyMGtpdGNoZW4lMjBzcGljZXMlMjBoZXJicyUyMHJhdyUyMGNvb2tpbmclMjBpbmdyZWRpZW50c3xlbnwwfHx8fDE3ODk0OTkxNzF8MA&ixlib=rb-4.1.0&q=85",
+    "category_vegetables": "https://images.unsplash.com/photo-1516594798947-e65505dbb29d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA2ODl8MHwxfHNlYXJjaHwyfHxfcmVzaCUyMG9yZ2FuaWMlMjBncmVlbiUyMHZlZ2V0YWJsZXMlMjBtYXJrZXQlMjBwcm9kdWNlfGVufDB8fHx8MTc4OTQ5OTE3MXww&ixlib=rb-4.1.0&q=85",
+    "category_fruits": "https://images.unsplash.com/photo-1619566636858-adf3ef46400b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzR8MHwxfHNlYXJjaHwyfHxmcmVzaCUyMHRyb3BpY2FsJTIwZnJ1aXRzJTIwc2VsZWN0aW9uJTIwdmlicmFudHxlbnwwfHx8fDE3ODk0OTkxNzF8MA&ixlib=rb-4.1.0&q=85",
+    "category_spices": "https://images.unsplash.com/photo-1506368249639-73a05d6f6488?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzNTl8MHwxfHNlYXJjaHwxfHxhc2lhbiUyMGtpdGNoZW4lMjBzcGljZXMlMjBoZXJicyUyMHJhdyUyMGNvb2tpbmclMjBpbmdyZWRpZW50c3xlbnwwfHx8fDE3ODk0OTkxNzF8MA&ixlib=rb-4.1.0&q=85",
+    "category_protein": "https://images.unsplash.com/photo-1557844352-761f2565b576?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA2ODl8MHwxfHNlYXJjaHwxfHxmcmVzaCUyMG9yZ2FuaWMlMjBncmVlbiUyMHZlZ2V0YWJsZXMlMjBtYXJrZXQlMjBwcm9kdWNlfGVufDB8fHx8MTc4OTQ5OTE3MXww&ixlib=rb-4.1.0&q=85",
+    "category_sembako": "https://images.unsplash.com/photo-1591586116988-62fe65164f8d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA2ODl8MHwxfHNlYXJjaHw0fHxfcmVzaCUyMG9yZ2FuaWMlMjBncmVlbiUyMHZlZ2V0YWJsZXMlMjBtYXJrZXQlMjBwcm9kdWNlfGVufDB8fHx8MTc4OTQ5OTE3MXww&ixlib=rb-4.1.0&q=85"
+  },
+  "instructions_to_main_agent": [
+    "Ensure Javascript file implementation uses React with Tailwind CSS and Lucide React icons.",
+    "MUST retain data-testid attribute on all interactive elements (buttons, inputs, cards, cart controls).",
+    "Implement Google Sheets API / Mock data adapter seamlessly for products catalog with complete Indonesian kitchen categories: Sayuran, Buah, Bumbu Dapur, Telur & Protein, Sembako, Minyak & Bumbu.",
+    "Make sure unit ('satuan') is clearly formatted e.g. 'kg', 'ikat', 'pcs', 'bungkus', 'botol', 'pack'.",
+    "WhatsApp checkout link must construct message text with customer details and line items formatted with quantity and unit.",
+    "Include empty state, skeleton loading animation, and Sonner toast notifications for user actions (added to cart, item removed, checkout submitted).",
+    "Provide PWA manifest support & responsive mobile bottom navigation bar."
+  ]
+}

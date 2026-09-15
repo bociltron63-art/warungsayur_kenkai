@@ -1,0 +1,14 @@
+{
+    "short_name": "KenKai",
+    "name": "Warung Sayur KenKai",
+    "description": "Belanja sayur segar & kebutuhan dapur untuk area Bekasi & Tipar Cakung.",
+    "start_url": ".",
+    "display": "standalone",
+    "orientation": "portrait",
+    "theme_color": "#15803d",
+    "background_color": "#fafaf9",
+    "icons": [
+        { "src": "icon-192.png", "type": "image/png", "sizes": "192x192", "purpose": "any maskable" },
+        { "src": "icon-512.png", "type": "image/png", "sizes": "512x512", "purpose": "any maskable" }
+    ]
+}
