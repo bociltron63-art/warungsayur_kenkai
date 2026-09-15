@@ -50,7 +50,7 @@ export const ProductCard = ({ product, onOpen }) => {
       </div>
 
       <div className="p-3 sm:p-4 flex flex-col flex-1">
-        <h3 className="font-heading font-semibold text-stone-900 text-sm sm:text-base leading-snug line-clamp-2">
+        <h3 className="font-heading font-semibold text-stone-900 text-sm sm:text-base leading-snug line-clamp-2 min-h-[2.6em]">
           {product.nama_produk}
         </h3>
         <div className="mt-1.5 mb-3">
@@ -65,35 +65,35 @@ export const ProductCard = ({ product, onOpen }) => {
             <button
               disabled
               data-testid={`add-disabled-${product.id}`}
-              className="w-full py-2.5 rounded-xl bg-stone-100 text-stone-400 text-sm font-semibold cursor-not-allowed"
+              className="w-full h-14 rounded-2xl bg-stone-100 text-stone-400 text-[15px] font-semibold cursor-not-allowed"
             >
               Stok Habis
             </button>
           ) : (
-            <div className="flex flex-wrap items-center gap-1.5" onClick={(e) => e.stopPropagation()}>
-              <div className="flex items-center rounded-xl border border-border flex-shrink-0">
+            <div className="flex flex-col gap-2.5" onClick={(e) => e.stopPropagation()}>
+              <div className="flex items-center rounded-xl border border-border self-start">
                 <button
                   data-testid={`card-qty-minus-${product.id}`}
                   onClick={() => setQty((q) => Math.max(1, q - 1))}
-                  className="w-7 h-9 flex items-center justify-center text-stone-600 hover:text-kk-green"
+                  className="w-9 h-10 flex items-center justify-center text-stone-600 hover:text-kk-green"
                 >
-                  <Minus className="w-3.5 h-3.5" />
+                  <Minus className="w-4 h-4" />
                 </button>
-                <span className="w-5 sm:w-6 text-center text-xs sm:text-sm font-bold" data-testid={`card-qty-${product.id}`}>{qty}</span>
+                <span className="w-8 text-center text-sm font-bold" data-testid={`card-qty-${product.id}`}>{qty}</span>
                 <button
                   data-testid={`card-qty-plus-${product.id}`}
                   onClick={() => setQty((q) => Math.min(product.stok, q + 1))}
-                  className="w-7 h-9 flex items-center justify-center text-stone-600 hover:text-kk-green"
+                  className="w-9 h-10 flex items-center justify-center text-stone-600 hover:text-kk-green"
                 >
-                  <Plus className="w-3.5 h-3.5" />
+                  <Plus className="w-4 h-4" />
                 </button>
               </div>
               <button
                 data-testid={`add-to-cart-${product.id}`}
                 onClick={handleAdd}
-                className="flex-1 min-w-[104px] inline-flex items-center justify-center gap-1 py-2.5 rounded-xl bg-kk-green text-white text-xs sm:text-sm font-semibold hover:bg-kk-dark active:scale-95 transition-all"
+                className="w-full h-14 inline-flex items-center justify-center gap-2 rounded-2xl bg-kk-green text-white text-[17px] font-semibold hover:bg-kk-dark active:scale-[0.98] transition-all"
               >
-                <Plus className="w-4 h-4" /> Keranjang
+                <Plus className="w-[22px] h-[22px]" /> Keranjang
               </button>
             </div>
           )}
