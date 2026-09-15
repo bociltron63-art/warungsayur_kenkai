@@ -1,0 +1,31 @@
+{
+  "summary": "Verified aktif/stok business rules against live Google Sheet catalog. Backend correctly excludes row 10 Minyak Goreng (aktif=FALSE) from GET /api/products and returns 404 on /api/products/10. Unit test on _parse_csv confirms aktif=TRUE + stok=0 rows ARE kept (Habis scenario). ProductCard.jsx renders badge-habis and disabled add-disabled button when stok<=0 (code-reviewed). Frontend /produk shows only 9 active products (IDs 1-9), no Minyak Goreng anywhere, search 'minyak' returns 0 results, search 'bayam' returns 1. All 4 pytest cases pass.",
+  "backend_issues": { "critical": [], "minor": [] },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_aktif_stok_rules.py",
+    "/app/test_reports/pytest/aktif_stok_results.xml"
+  ],
+  "action_items": [
+    "Optional: to visually validate the Habis badge/disabled button end-to-end, ask user to set aktif=TRUE and stok=0 for one row in the Google Sheet (e.g. keep Minyak Goreng active with stok=0). Currently the sheet has NO row with aktif=TRUE+stok=0, so the on-site 'Habis' state is only verified via unit test + code review, not a live screenshot."
+  ],
+  "critical_code_review_comments": [
+    "product_service._parse_csv line 98: correct — filters aktif=FALSE only; stok=0 rows pass through with aktif=True.",
+    "ProductCard.jsx lines 41-71: correct dual-state rendering — badge-habis + Stok Habis disabled button when product.stok<=0. data-testid present on both.",
+    "Product cache TTL 300s: after Sheet edits, users may need up to 5 min or must call GET /api/products?refresh=true; UI has no explicit refresh trigger. Consider surfacing this or lowering TTL for content edits."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_aktif_stok_rules.py (new)"
+  ],
+  "success_rate": { "backend": "100%", "frontend": "100%" },
+  "test_credentials": "N/A",
+  "seed_data_creation": "None. Uses live Google Sheet configured in backend/.env.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Live sheet currently has 10 rows: IDs 1-9 aktif=TRUE, ID 10 Minyak Goreng aktif=FALSE stok=0. No aktif=TRUE + stok=0 case currently exists in sheet — Habis badge UI verified only via unit test + ProductCard code review. Route for catalog page is /produk (not /products). Category chips do NOT use data-testid='category-chip-*' prefix (rendered as plain buttons); search input has no data-testid but placeholder starts 'Cari sayur'. Consider adding data-testid to category chips and search input for future tests.",
+  "rca of the issue": "N/A — original user question was already resolved by existing filter logic. Minyak Goreng row 10 has aktif=FALSE in the sheet, and product_service._parse_csv drops such rows at line 98, so it is correctly absent from the site."
+}
