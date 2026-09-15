@@ -65,7 +65,7 @@ export const ProductCard = ({ product, onOpen }) => {
             <button
               disabled
               data-testid={`add-disabled-${product.id}`}
-              className="w-full h-14 rounded-2xl bg-stone-100 text-stone-400 text-[15px] font-semibold cursor-not-allowed"
+              className="w-full h-[52px] rounded-2xl bg-stone-100 text-stone-400 text-[15px] font-semibold cursor-not-allowed"
             >
               Stok Habis
             </button>
@@ -91,7 +91,7 @@ export const ProductCard = ({ product, onOpen }) => {
               <button
                 data-testid={`add-to-cart-${product.id}`}
                 onClick={handleAdd}
-                className="w-full h-14 inline-flex items-center justify-center gap-2 rounded-2xl bg-kk-green text-white text-[17px] font-semibold hover:bg-kk-dark active:scale-[0.98] transition-all"
+                className="w-full h-[52px] inline-flex items-center justify-center gap-2 rounded-2xl bg-kk-green text-white text-[17px] font-semibold hover:bg-kk-dark active:scale-[0.98] transition-all"
               >
                 <Plus className="w-[22px] h-[22px]" /> Keranjang
               </button>
