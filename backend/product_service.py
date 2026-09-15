@@ -114,14 +114,43 @@ def _parse_csv(text: str) -> List[dict]:
     return products
 
 
+import re
+import urllib.parse
+
+def _normalize_sheet_url(raw_url: str) -> str:
+    """Transform standard Google Sheet share/view URLs into direct CSV export URLs."""
+    if not raw_url:
+        return ""
+    url = raw_url.strip()
+    # If already a pub/export CSV link, return as is
+    if "export?format=csv" in url or "pub?output=csv" in url:
+        return url
+    
+    # Handle standard edit/share links: https://docs.google.com/spreadsheets/d/<ID>/edit...
+    m = re.search(r"docs\.google\.com/spreadsheets/d/([a-zA-Z0-9-_]+)", url)
+    if m:
+        sheet_id = m.group(1)
+        # Extract gid if present
+        gid_match = re.search(r"[#&?]gid=([0-9]+)", url)
+        gid = f"&gid={gid_match.group(1)}" if gid_match else ""
+        return f"https://docs.google.com/spreadsheets/d/{sheet_id}/export?format=csv{gid}"
+    
+    # Handle publish links: https://docs.google.com/spreadsheets/d/e/<ID>/pubhtml...
+    if "docs.google.com/spreadsheets/d/e/" in url:
+        return re.sub(r"/pubhtml.*", "/pub?output=csv", url)
+    
+    return url
+
+
 def _fetch_source() -> List[dict]:
-    if not SHEET_URL:
+    url = _normalize_sheet_url(os.environ.get("GOOGLE_SHEET_CSV_URL", "").strip())
+    if not url:
         logger.info("GOOGLE_SHEET_CSV_URL not set - using bundled mock catalog.")
         return _parse_csv(MOCK_CSV)
 
-    logger.info("Fetching product catalog from Google Sheet CSV export.")
+    logger.info("Fetching product catalog from: %s", url)
     try:
-        resp = requests.get(SHEET_URL, timeout=10)
+        resp = requests.get(url, timeout=10)
         resp.raise_for_status()
     except requests.RequestException as exc:
         logger.error("Google Sheet fetch failed: %s", exc)
