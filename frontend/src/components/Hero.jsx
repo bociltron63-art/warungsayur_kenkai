@@ -52,11 +52,16 @@ export const Hero = ({ categories = [] }) => (
         <div className="relative rounded-3xl overflow-hidden shadow-xl aspect-[4/3] lg:aspect-square">
           <img src={HERO_IMG} alt="Sayuran segar Warung Sayur KenKai" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-          <div className="absolute bottom-4 left-4 right-4 flex flex-wrap gap-2">
-            {categories.slice(0, 4).map((c) => (
-              <span key={c} className="px-3 py-1.5 rounded-full bg-white/90 backdrop-blur text-xs font-semibold text-stone-800">
+          <div className="absolute bottom-4 left-4 right-4 flex gap-2 overflow-x-auto no-scrollbar py-1" data-testid="hero-category-chips">
+            {categories.map((c) => (
+              <Link
+                key={c}
+                to={`/produk?kategori=${encodeURIComponent(c)}`}
+                data-testid={`hero-chip-${c}`}
+                className="whitespace-nowrap flex-shrink-0 px-3 py-1.5 rounded-full bg-white/90 backdrop-blur text-xs font-semibold text-stone-800 hover:bg-white transition-colors"
+              >
                 {CATEGORY_ICONS[c] || "📦"} {c}
-              </span>
+              </Link>
             ))}
           </div>
         </div>
