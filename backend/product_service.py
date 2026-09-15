@@ -83,6 +83,28 @@ def _to_int(value: str, default: int = 0) -> int:
         return default
 
 
+def _row_to_product(normalized: dict) -> dict | None:
+    """Validate one normalized row; return a product dict or None if it should be skipped."""
+    pid = normalized.get("id", "")
+    nama = normalized.get("nama_produk", "")
+    if not pid or not nama:
+        return None
+    if not _to_bool(normalized.get("aktif", "")):
+        return None  # only active products are exposed
+    return {
+        "id": pid,
+        "sku": normalized.get("sku", ""),
+        "nama_produk": nama,
+        "kategori": normalized.get("kategori", "Lainnya") or "Lainnya",
+        "deskripsi": normalized.get("deskripsi", ""),
+        "harga": _to_int(normalized.get("harga", "0")),
+        "satuan": normalized.get("satuan", "pcs") or "pcs",
+        "stok": _to_int(normalized.get("stok", "0")),
+        "foto": normalized.get("foto", ""),
+        "aktif": True,
+    }
+
+
 def _parse_csv(text: str) -> List[dict]:
     """Parse CSV text into validated, active-only product dicts."""
     reader = csv.DictReader(io.StringIO(text))
@@ -91,26 +113,9 @@ def _parse_csv(text: str) -> List[dict]:
         if not row:
             continue
         normalized = {(k or "").strip().lower(): (v or "").strip() for k, v in row.items()}
-        pid = normalized.get("id", "")
-        nama = normalized.get("nama_produk", "")
-        if not pid or not nama:
-            continue
-        if not _to_bool(normalized.get("aktif", "")):
-            continue  # only active products are exposed
-        products.append(
-            {
-                "id": pid,
-                "sku": normalized.get("sku", ""),
-                "nama_produk": nama,
-                "kategori": normalized.get("kategori", "Lainnya") or "Lainnya",
-                "deskripsi": normalized.get("deskripsi", ""),
-                "harga": _to_int(normalized.get("harga", "0")),
-                "satuan": normalized.get("satuan", "pcs") or "pcs",
-                "stok": _to_int(normalized.get("stok", "0")),
-                "foto": normalized.get("foto", ""),
-                "aktif": True,
-            }
-        )
+        product = _row_to_product(normalized)
+        if product is not None:
+            products.append(product)
     return products
 
 

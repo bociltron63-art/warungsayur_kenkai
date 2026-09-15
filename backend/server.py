@@ -94,6 +94,7 @@ async def list_categories():
 
 @api_router.get("/products/{product_id}", response_model=Product)
 async def get_product(product_id: str):
+    product = None
     try:
         product = product_service.get_product(product_id)
     except product_service.ProductSourceError as exc:
